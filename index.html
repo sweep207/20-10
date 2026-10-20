@@ -619,6 +619,10 @@
 
         .textLetter .contentLetter {
             font-size: 19px;
+            max-height: 210px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            scrollbar-width: none;
             text-align: center;
             padding: 0px 30px;
             margin-top: 10px;
@@ -1140,16 +1144,17 @@
         const textLetterP = "💐❤️ Nhân ngày Phụ nữ Việt Nam 20/10, con chúc mẹ và chị yêu luôn mạnh khỏe, xinh đẹp, vui vẻ và hạnh phúc. Chúc mẹ luôn bình an, ít lo toan, mãi nở nụ cười trên môi và có thật nhiều niềm vui bên gia đình. Chúc chị ngày càng xinh đẹp, tự tin, thành công, gặp nhiều may mắn và luôn đạt được những điều mình mong muốn. Cảm ơn mẹ và chị vì đã luôn yêu thương, quan tâm và là những người phụ nữ tuyệt vời nhất trong cuộc đời con. Mong rằng gia đình mình sẽ luôn bình an, yêu thương nhau và cùng nhau trải qua thật nhiều năm tháng hạnh phúc. Con yêu mẹ và chị nhiều lắm! Chúc hai người có một ngày 20/10 thật ý nghĩa, ngập tràn hoa, quà và yêu thương. Mong mẹ luôn khỏe mạnh, chị luôn rạng rỡ và cả hai sẽ mãi hạnh phúc, bình an, gặp thật nhiều điều tốt đẹp không chỉ hôm nay mà còn trong tất cả những ngày về sau! 🌷💗🌹";
         let timoutTextLetterContent;
         function textCharLetterContent() {
-            if (indexTextContent < textLetterP.length) {
-                textLetterContent.textContent += textLetterP[indexTextContent];
-                indexTextContent++;
-                setTimeout(indexTextContent, 1);
-            }
-            else {
-                clearInterval(timoutTextLetterContent)
+    if (indexTextContent < textLetterP.length) {
+        textLetterContent.textContent += textLetterP[indexTextContent];
+        indexTextContent++;
 
-            }
-        }
+        // Tự cuộn theo chữ đang chạy
+        textLetterContent.scrollTop =
+            textLetterContent.scrollHeight;
+    } else {
+        clearInterval(timoutTextLetterContent);
+    }
+}
         function funcTimeoutLetterContent() {
             indexTextContent = 0; // Reset indexTextContent
             textLetterContent.textContent = ''; // Xóa nội dung hiện tại của textLetter
